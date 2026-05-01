@@ -2,7 +2,6 @@ import React from 'react';
 import { Award, Globe, Shield, Activity } from 'lucide-react';
 
 // Apni images ko yahan import karen. 
-// Note: Path ('../assets/...') aur extension ('.jpg', '.png') ko apne project ke hisaab se adjust kar lijiyega.
 import image1 from '../../assets/gulzar.jpg'; 
 import image2 from '../../assets/sumair.jpg';
 
@@ -22,10 +21,10 @@ const Leadership: React.FC = () => {
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
             <div className="md:w-2/5 bg-primary-dark relative">
               <img 
-  src={image2} 
-  alt="Muhammad Sumair - Operations" 
-  className="w-full h-full object-cover opacity-80 mix-blend-overlay"
-/>
+                src={image1} 
+                alt="Gulzar Ali - Founder" 
+                className="w-full h-full object-cover opacity-80 mix-blend-overlay"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-primary-dark to-transparent opacity-90"></div>
               <div className="absolute bottom-0 left-0 p-6">
                 <h3 className="text-2xl font-bold text-white mb-1">Gulzar Ali</h3>
@@ -69,7 +68,8 @@ const Leadership: React.FC = () => {
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
             <div className="md:w-2/5 bg-primary relative">
               <img 
-src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=80"                alt="Muhammad Sumair - Operations" 
+                src={image2} 
+                alt="Muhammad Sumair - Operations" 
                 className="w-full h-full object-cover opacity-80 mix-blend-overlay"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary to-transparent opacity-90"></div>
