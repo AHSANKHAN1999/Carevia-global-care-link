@@ -4,7 +4,7 @@ import { Award, Globe, Shield, Activity } from 'lucide-react';
 // Apni images ko yahan import karen. 
 // Note: Path ('../assets/...') aur extension ('.jpg', '.png') ko apne project ke hisaab se adjust kar lijiyega.
 import image1 from '../../assets/gulzar.jpg'; 
-import image2 from "../../assets/Sumair.jpg";
+
 const Leadership: React.FC = () => {
   return (
     <section id="leadership" className="py-20 bg-gray-50">
