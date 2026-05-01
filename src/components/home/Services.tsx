@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { 
-  Activity, 
-  Ambulance, 
-  Baby, 
-  UserPlus, 
-  Stethoscope, 
-  Thermometer, 
+import {
+  Activity,
+  Ambulance,
+  Baby,
+  UserPlus,
+  Stethoscope,
+  Thermometer,
   Plane,
   ChevronDown,
   ChevronUp
@@ -104,7 +104,7 @@ const ServiceCard: React.FC<{ service: ServiceDetails }> = ({ service }) => {
         <h3 className="text-xl font-bold text-primary-dark mb-2">{service.title}</h3>
         <p className="text-gray-600 mb-4">{service.description}</p>
         
-        <button 
+        <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="flex items-center gap-2 text-primary font-semibold hover:text-primary-light transition-colors"
         >
@@ -140,7 +140,8 @@ const Services: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* YAHAN grid mein 'items-start' ka izafa kiya gaya hai */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
           {servicesData.map((service, index) => (
             <ServiceCard key={index} service={service} />
           ))}
