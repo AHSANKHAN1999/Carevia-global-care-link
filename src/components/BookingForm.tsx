@@ -17,22 +17,22 @@ const BookingForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send data to an API
-    // For now, redirect to WhatsApp with pre-filled details
     const message = encodeURIComponent(`New Booking Request:\nName: ${formData.patientName}\nLocation: ${formData.location}\nService: ${formData.serviceRequired}\nUrgency: ${formData.urgencyLevel}\nSchedule: ${formData.schedule}`);
     window.open(`https://wa.me/923022096374?text=${message}`, '_blank');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-primary-dark mb-2">Book Professional Care</h2>
-        <p className="text-gray-600">Fill out the form below and our team will respond within minutes.</p>
+    // Mobile pe padding p-5 ki hai taake form screen se bahar na jaye
+    <form onSubmit={handleSubmit} className="bg-white p-5 md:p-8 rounded-2xl shadow-xl border border-gray-100">
+      <div className="mb-6 md:mb-8">
+        <h2 className="text-xl md:text-2xl font-bold text-primary-dark mb-1.5 md:mb-2">Book Professional Care</h2>
+        <p className="text-sm md:text-base text-gray-600">Fill out the form below and our team will respond within minutes.</p>
       </div>
 
-      <div className="space-y-6">
+      {/* Mobile pe inputs ka gap space-y-4 kar diya hai */}
+      <div className="space-y-4 md:space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1.5 md:mb-2 flex items-center gap-2">
             <User size={16} className="text-primary" /> Patient Name
           </label>
           <input 
@@ -41,13 +41,13 @@ const BookingForm: React.FC = () => {
             value={formData.patientName}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors outline-none"
+            className="w-full px-4 py-2.5 md:py-3 text-sm md:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors outline-none"
             placeholder="Enter patient's full name"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1.5 md:mb-2 flex items-center gap-2">
             <MapPin size={16} className="text-primary" /> Location / City
           </label>
           <input 
@@ -56,13 +56,13 @@ const BookingForm: React.FC = () => {
             value={formData.location}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors outline-none"
+            className="w-full px-4 py-2.5 md:py-3 text-sm md:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors outline-none"
             placeholder="E.g., Karachi, Dubai, etc."
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1.5 md:mb-2 flex items-center gap-2">
             <Stethoscope size={16} className="text-primary" /> Service Required
           </label>
           <select 
@@ -70,7 +70,7 @@ const BookingForm: React.FC = () => {
             value={formData.serviceRequired}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors outline-none bg-white"
+            className="w-full px-4 py-2.5 md:py-3 text-sm md:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors outline-none bg-white"
           >
             <option value="" disabled>Select a service</option>
             <option value="ICU Level Care">ICU Level / HDU At Home</option>
@@ -83,16 +83,17 @@ const BookingForm: React.FC = () => {
           </select>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Mobile pe gap-4, Desktop pe gap-6 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1.5 md:mb-2 flex items-center gap-2">
               <AlertTriangle size={16} className="text-primary" /> Urgency Level
             </label>
             <select 
               name="urgencyLevel"
               value={formData.urgencyLevel}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors outline-none bg-white"
+              className="w-full px-4 py-2.5 md:py-3 text-sm md:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors outline-none bg-white"
             >
               <option value="Normal">Normal (Within 24 Hours)</option>
               <option value="High">High (Within 2-4 Hours)</option>
@@ -101,7 +102,7 @@ const BookingForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1.5 md:mb-2 flex items-center gap-2">
               <Calendar size={16} className="text-primary" /> Schedule
             </label>
             <input 
@@ -110,19 +111,20 @@ const BookingForm: React.FC = () => {
               value={formData.schedule}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors outline-none"
+              className="w-full px-4 py-2.5 md:py-3 text-sm md:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors outline-none"
             />
           </div>
         </div>
 
+        {/* WhatsApp styling diya hai submit button ko */}
         <button 
           type="submit" 
-          className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-colors mt-8"
+          className="w-full bg-[#25D366] hover:bg-green-600 text-white font-bold py-3.5 md:py-4 rounded-lg flex items-center justify-center gap-2 transition-all mt-6 md:mt-8 shadow-lg shadow-green-500/30 active:scale-95"
         >
           <Send size={20} />
-          Submit Booking Request
+          Submit via WhatsApp
         </button>
-        <p className="text-xs text-center text-gray-500 mt-4">
+        <p className="text-[10px] md:text-xs text-center text-gray-500 mt-2 md:mt-4">
           By submitting, you agree to our patient confidentiality terms.
         </p>
       </div>
