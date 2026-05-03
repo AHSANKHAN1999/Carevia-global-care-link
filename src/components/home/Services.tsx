@@ -21,7 +21,7 @@ interface ServiceDetails {
 const servicesData: ServiceDetails[] = [
   {
     title: "ICU Level / HDU AT HOME",
-    icon: <Activity size={32} className="text-secondary" />,
+    icon: <Activity size={28} className="text-secondary" />,
     description: "Comprehensive intensive care unit setup and monitoring in the comfort of your home.",
     items: [
       "Ventilator Management",
@@ -33,7 +33,7 @@ const servicesData: ServiceDetails[] = [
   },
   {
     title: "EMERGENCY RESPONSE",
-    icon: <Ambulance size={32} className="text-secondary" />,
+    icon: <Ambulance size={28} className="text-secondary" />,
     description: "Rapid response medical team available 24/7 for critical situations.",
     items: [
       "Immediate Nursing Dispatch",
@@ -43,7 +43,7 @@ const servicesData: ServiceDetails[] = [
   },
   {
     title: "PEDIATRIC CARE",
-    icon: <Baby size={32} className="text-secondary" />,
+    icon: <Baby size={28} className="text-secondary" />,
     description: "Specialized care for infants and children by pediatric-trained professionals.",
     items: [
       "Pediatric ICU Support",
@@ -52,7 +52,7 @@ const servicesData: ServiceDetails[] = [
   },
   {
     title: "GERIATRIC CARE",
-    icon: <UserPlus size={32} className="text-secondary" />,
+    icon: <UserPlus size={28} className="text-secondary" />,
     description: "Dedicated elderly care focusing on comfort, mobility, and overall well-being.",
     items: [
       "Bedridden Patient Care",
@@ -61,7 +61,7 @@ const servicesData: ServiceDetails[] = [
   },
   {
     title: "POST-OPERATIVE CARE",
-    icon: <Stethoscope size={32} className="text-secondary" />,
+    icon: <Stethoscope size={28} className="text-secondary" />,
     description: "Professional recovery assistance following surgical procedures.",
     items: [
       "Surgical Recovery",
@@ -70,7 +70,7 @@ const servicesData: ServiceDetails[] = [
   },
   {
     title: "MEDICAL EQUIPMENT RENTAL / BUY",
-    icon: <Thermometer size={32} className="text-secondary" />,
+    icon: <Thermometer size={28} className="text-secondary" />,
     description: "High-quality medical equipment available for rent or purchase.",
     items: [
       "Oxygen Machine & Concentrators",
@@ -82,7 +82,7 @@ const servicesData: ServiceDetails[] = [
   },
   {
     title: "TRAVEL & MEDICAL COMPANION",
-    icon: <Plane size={32} className="text-secondary" />,
+    icon: <Plane size={28} className="text-secondary" />,
     description: "Professional medical escort for local or international travel (Umrah).",
     items: [
       "Nurse travels with patients",
@@ -96,29 +96,38 @@ const ServiceCard: React.FC<{ service: ServiceDetails }> = ({ service }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    // 'h-full' add kiya gaya hai taake swipe cards ki height barabar rahay
-    <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
-      <div className="p-6 flex-grow flex flex-col">
-        <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-          {service.icon}
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
+      {/* Mobile pe padding p-5 ki hai */}
+      <div className="p-5 md:p-6 flex-grow flex flex-col">
+        
+        {/* YAHAN MAGIC HAI: Mobile pe Icon aur Title side-by-side (flex-row), PC pe upar neechay (flex-col) */}
+        <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 mb-3 md:mb-4">
+          <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 bg-primary/10 rounded-lg flex items-center justify-center md:mb-4">
+            {service.icon}
+          </div>
+          <h3 className="text-lg md:text-xl font-bold text-primary-dark text-left leading-tight">
+            {service.title}
+          </h3>
         </div>
-        <h3 className="text-xl font-bold text-primary-dark mb-2">{service.title}</h3>
-        <p className="text-gray-600 mb-4 flex-grow">{service.description}</p>
+
+        <p className="text-sm md:text-base text-gray-600 mb-4 flex-grow text-left">
+          {service.description}
+        </p>
         
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 text-primary font-semibold hover:text-primary-light transition-colors mt-auto"
+          className="flex items-center gap-2 text-primary font-semibold hover:text-primary-light transition-colors mt-auto text-sm md:text-base"
         >
           {isExpanded ? 'Show Less' : 'View Details'}
-          {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
         </button>
 
         {isExpanded && (
           <div className="mt-4 pt-4 border-t border-gray-100">
             <ul className="space-y-2">
               {service.items.map((item, index) => (
-                <li key={index} className="flex items-start gap-2 text-gray-700">
-                  <span className="text-secondary mt-1">•</span>
+                <li key={index} className="flex items-start gap-2 text-sm md:text-base text-gray-700 text-left">
+                  <span className="text-secondary mt-0.5">•</span>
                   {item}
                 </li>
               ))}
@@ -132,7 +141,6 @@ const ServiceCard: React.FC<{ service: ServiceDetails }> = ({ service }) => {
 
 const Services: React.FC = () => {
   return (
-    // Mobile par py-12 aur Desktop par py-20 taake mobile pe khali jagah kam ho
     <section id="services" className="py-12 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
@@ -142,23 +150,10 @@ const Services: React.FC = () => {
           </p>
         </div>
 
-        {/* MOBILE SWIPE & DESKTOP GRID CONTAINER */}
-        <div 
-          className="flex md:grid overflow-x-auto snap-x snap-mandatory md:overflow-visible grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch pb-6 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0" 
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {/* Custom CSS to hide webkit scrollbar */}
-          <style>{`
-            .flex::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
-          
+        {/* Wapas Vertical Grid: Mobile pe gap-4, PC pe gap-8 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 items-start">
           {servicesData.map((service, index) => (
-            // Mobile pe card ki width set ki hai aur 'snap-center' lagaya hai
-            <div key={index} className="min-w-[85vw] sm:min-w-[320px] md:min-w-0 snap-center flex-shrink-0 h-auto">
-              <ServiceCard service={service} />
-            </div>
+            <ServiceCard key={index} service={service} />
           ))}
         </div>
       </div>
