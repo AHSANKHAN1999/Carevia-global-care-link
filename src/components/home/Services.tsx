@@ -96,17 +96,18 @@ const ServiceCard: React.FC<{ service: ServiceDetails }> = ({ service }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
-      <div className="p-6">
+    // 'h-full' add kiya gaya hai taake swipe cards ki height barabar rahay
+    <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
+      <div className="p-6 flex-grow flex flex-col">
         <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
           {service.icon}
         </div>
         <h3 className="text-xl font-bold text-primary-dark mb-2">{service.title}</h3>
-        <p className="text-gray-600 mb-4">{service.description}</p>
+        <p className="text-gray-600 mb-4 flex-grow">{service.description}</p>
         
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 text-primary font-semibold hover:text-primary-light transition-colors"
+          className="flex items-center gap-2 text-primary font-semibold hover:text-primary-light transition-colors mt-auto"
         >
           {isExpanded ? 'Show Less' : 'View Details'}
           {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
@@ -131,19 +132,33 @@ const ServiceCard: React.FC<{ service: ServiceDetails }> = ({ service }) => {
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-20 bg-gray-50">
+    // Mobile par py-12 aur Desktop par py-20 taake mobile pe khali jagah kam ho
+    <section id="services" className="py-12 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl font-bold text-primary-dark mb-4">Our Core Services</h2>
-          <p className="text-lg text-gray-600">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-4">Our Core Services</h2>
+          <p className="text-base md:text-lg text-gray-600">
             Providing comprehensive, hospital-grade medical care tailored to your needs, right in the comfort of your home.
           </p>
         </div>
 
-        {/* YAHAN grid mein 'items-start' ka izafa kiya gaya hai */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+        {/* MOBILE SWIPE & DESKTOP GRID CONTAINER */}
+        <div 
+          className="flex md:grid overflow-x-auto snap-x snap-mandatory md:overflow-visible grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch pb-6 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0" 
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {/* Custom CSS to hide webkit scrollbar */}
+          <style>{`
+            .flex::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+          
           {servicesData.map((service, index) => (
-            <ServiceCard key={index} service={service} />
+            // Mobile pe card ki width set ki hai aur 'snap-center' lagaya hai
+            <div key={index} className="min-w-[85vw] sm:min-w-[320px] md:min-w-0 snap-center flex-shrink-0 h-auto">
+              <ServiceCard service={service} />
+            </div>
           ))}
         </div>
       </div>
