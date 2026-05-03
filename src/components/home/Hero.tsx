@@ -1,12 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, PhoneCall, MessageCircle } from 'lucide-react';
+import { ArrowRight, PhoneCall, MessageCircle, CheckCircle } from 'lucide-react';
 
 import doctorImage from '../../assets/images/doctor-hero.png';
 
 const Hero: React.FC = () => {
+  // Key Highlights ka array
+  const keyHighlights = [
+    "24/7 Care Support",
+    "Licensed & Skilled Staff",
+    "Home Nursing Services",
+    "ICU / Post-Operative Care",
+    "Elderly & Pediatric Care"
+  ];
+
   return (
-    // Yahan maine lg:pt-32 ko lg:pt-10 kar diya hai taake desktop pe upar ka gap khatam ho jaye
     <section className="relative bg-primary-dark text-white pt-24 lg:pt-10 pb-0 overflow-hidden">
       {/* Background Image Overlay */}
       <div className="absolute inset-0 z-0">
@@ -33,10 +41,24 @@ const Hero: React.FC = () => {
               Hospital-Level ICU & Medical Care at <span className="text-secondary">Your Doorstep.</span>
             </h1>
             
-            <p className="text-lg sm:text-xl lg:text-3xl mb-6 lg:mb-12 text-gray-200 max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl lg:text-2xl mb-6 text-gray-200 max-w-2xl mx-auto lg:mx-0">
               24/7 Emergency Response Professional Care in Minutes.
             </p>
+
+            {/* KEY HIGHLIGHTS SECTION (New Addition) */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8 lg:mb-12">
+              {keyHighlights.map((point, index) => (
+                <div 
+                  key={index} 
+                  className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-sm hover:bg-white/20 transition-all duration-300"
+                >
+                  <CheckCircle size={16} className="text-[#25D366]" />
+                  <span className="text-sm sm:text-base font-medium text-white">{point}</span>
+                </div>
+              ))}
+            </div>
             
+            {/* BUTTONS */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
               <a 
                 href="https://wa.me/923022096374?text=Assalam o Alaikum,/ Hello CAREVIA mujhe urgently nursing/medical service chahiye." 
